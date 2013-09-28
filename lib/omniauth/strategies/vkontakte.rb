@@ -73,7 +73,7 @@ module OmniAuth
       def authorize_params
         super.tap do |params|
           # just a copypaste from omniauth-facebook
-          %w[display state scope].each do |v|
+          %w[display state scope lang].each do |v|
             if request.params[v]
               params[v.to_sym] = request.params[v]
               # to support omniauth-oauth2's auto csrf protection
