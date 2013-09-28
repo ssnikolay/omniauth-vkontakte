@@ -26,7 +26,7 @@ module OmniAuth
         :param_name => 'access_token'
       }
 
-      option :authorize_options, [:scope, :display, :lang]
+      option :authorize_options, [:scope, :display]
 
       uid { access_token.params['user_id'].to_s }
 
@@ -58,6 +58,7 @@ module OmniAuth
             :uids         => uid,
             :fields       => fields.join(','),
             :access_token => access_token.token,
+            :headers => {"Accept-Language" => "ru"}
           }
 
           result = access_token.post('/method/users.get', :params => params).parsed["response"]
@@ -73,7 +74,7 @@ module OmniAuth
       def authorize_params
         super.tap do |params|
           # just a copypaste from omniauth-facebook
-          %w[display state scope lang].each do |v|
+          %w[display state scope].each do |v|
             if request.params[v]
               params[v.to_sym] = request.params[v]
               # to support omniauth-oauth2's auto csrf protection
