@@ -26,7 +26,7 @@ module OmniAuth
         :param_name => 'access_token'
       }
 
-      option :authorize_options, [:scope, :display]
+      option :authorize_options, [:scope, :display, :lang]
 
       uid { access_token.params['user_id'].to_s }
 
